@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>HEADLOCK</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        background: linear-gradient(to bottom,#0b0b2d,#000014);
+        color:white;
+        overflow-x:hidden;
+    }
+
+    .container{
+        padding:40px 25px;
+    }
+
+    /* HEADER */
+    .top{
+        display:flex;
+        justify-content:space-between;
+        align-items:flex-start;
+    }
+
+    .title h1{
+        color:#ffd400;
+        font-size:58px;
+        font-weight:900;
+        letter-spacing:1px;
+    }
+
+    .title p{
+        color:#8f8f9d;
+        font-size:22px;
+        margin-top:8px;
+        letter-spacing:2px;
+    }
+
+    /* MENU */
+    .menu{
+        width:48px;
+        cursor:pointer;
+        margin-top:10px;
+    }
+
+    .menu div{
+        height:6px;
+        background:white;
+        border-radius:10px;
+        margin:7px 0;
+    }
+
+    /* CARD */
+    .card{
+        width:100%;
+        background:#23233c;
+        margin-top:55px;
+        border-radius:35px;
+        padding:20px;
+    }
+
+    .item{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:28px 10px;
+        border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    .item:last-child{
+        border-bottom:none;
+    }
+
+    .left{
+        display:flex;
+        align-items:center;
+        gap:18px;
+    }
+
+    /* ICON NHỎ LẠI */
+    .icon{
+        font-size:38px;
+        width:48px;
+        text-align:center;
+    }
+
+    .name{
+        font-size:22px;
+        font-weight:500;
+    }
+
+    /* SWITCH */
+    .switch{
+        position:relative;
+        width:78px;
+        height:42px;
+    }
+
+    .switch input{
+        display:none;
+    }
+
+    .slider{
+        position:absolute;
+        inset:0;
+        background:#5d5d70;
+        border-radius:50px;
+        transition:0.3s;
+        cursor:pointer;
+    }
+
+    .slider:before{
+        content:"";
+        position:absolute;
+        width:34px;
+        height:34px;
+        left:4px;
+        top:4px;
+        background:white;
+        border-radius:50%;
+        transition:0.3s;
+    }
+
+    input:checked + .slider{
+        background:#ffd400;
+    }
+
+    input:checked + .slider:before{
+        transform:translateX(36px);
+    }
+
+    .footer-text{
+        text-align:center;
+        color:#7c7c88;
+        margin-top:70px;
+        font-size:34px;
+        font-weight:700;
+        letter-spacing:2px;
+    }
+
+    /* SIDEBAR */
+    .sidebar{
+        position:fixed;
+        top:0;
+        right:-100%;
+        width:85%;
+        height:100%;
+        background:#05051b;
+        z-index:999;
+        transition:0.4s;
+        padding:30px;
+        overflow:auto;
+    }
+
+    .sidebar.active{
+        right:0;
+    }
+
+    .close{
+        color:#ffd400;
+        font-size:28px;
+        text-align:right;
+        cursor:pointer;
+        margin-bottom:20px;
+    }
+
+    .info-title{
+        font-size:60px;
+        font-weight:900;
+        margin-bottom:25px;
+    }
+
+    .section{
+        border-top:1px solid rgba(255,255,255,0.1);
+        padding:35px 0;
+    }
+
+    .section h2{
+        font-size:34px;
+        margin-bottom:15px;
+    }
+
+    .section p,
+    .section a{
+        color:#9b9ba6;
+        font-size:22px;
+        text-decoration:none;
+    }
+
+    .update-btn{
+        width:100%;
+        border:none;
+        background:#d4af37;
+        color:#11119d;
+        font-size:28px;
+        font-weight:900;
+        padding:28px;
+        border-radius:60px;
+        cursor:pointer;
+        margin-top:20px;
+    }
+
+    /* THÔNG BÁO */
+    .toast{
+        position:fixed;
+        bottom:30px;
+        left:50%;
+        transform:translateX(-50%);
+        background:#111;
+        color:white;
+        padding:15px 25px;
+        border-radius:15px;
+        font-size:18px;
+        opacity:0;
+        pointer-events:none;
+        transition:0.3s;
+        z-index:9999;
+    }
+
+    .toast.show{
+        opacity:1;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="top">
+        <div class="title">
+            <h1>HEADLOCK</h1>
+            <p>BY DUYLOC TWEAK</p>
+        </div>
+
+        <div class="menu" onclick="openMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <div class="item">
+            <div class="left">
+                <div class="icon">🎯</div>
+                <div class="name">REG LOCK</div>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" onchange="toggleMessage(this)">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="item">
+            <div class="left">
+                <div class="icon">🚀</div>
+                <div class="name">BOST CPU</div>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" onchange="toggleMessage(this)">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="item">
+            <div class="left">
+                <div class="icon">💀</div>
+                <div class="name">HEADLOCK</div>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" onchange="toggleMessage(this)">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="item">
+            <div class="left">
+                <div class="icon">⚙️</div>
+                <div class="name">FIX RUNG</div>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" onchange="toggleMessage(this)">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+    </div>
+
+    <div class="footer-text">
+        STARTING FILES
+    </div>
+
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+
+    <div class="close" onclick="closeMenu()">Done</div>
+
+    <div class="info-title">Info</div>
+
+    <div class="section">
+        <h2>Panel made by Duy Loc</h2>
+        <p>Zalo <a href="#">0385614724</a></p>
+    </div>
+
+    <div class="section">
+        <h2>FaceBook</h2>
+        <p>Duyy Locc</p>
+    </div>
+
+    <div class="section">
+        <h2>TikTok</h2>
+        <p>@duylocspotify</p>
+    </div>
+
+    <button class="update-btn" onclick="updateNow()">
+        UPDATE TO NEW+
+    </button>
+
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+
+function showToast(text){
+    const toast = document.getElementById("toast");
+
+    toast.innerText = text;
+    toast.classList.add("show");
+
+    setTimeout(()=>{
+        toast.classList.remove("show");
+    },2000);
+}
+
+function toggleMessage(el){
+
+    if(el.checked){
+        showToast("Đã Khởi Chạy REGLOCK IPHONE");
+    }else{
+        showToast("Đã Tắt REGLOCK");
+    }
+}
+
+function openMenu(){
+    document.getElementById("sidebar").classList.add("active");
+}
+
+function closeMenu(){
+    document.getElementById("sidebar").classList.remove("active");
+}
+
+function updateNow(){
+    showToast("liên hệ Admin để được hỗ trợ");
+}
+
+</script>
+
+</body>
+</html>
